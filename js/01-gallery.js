@@ -37,11 +37,39 @@ function getBigImage(event) {
 
   event.target.classList.add(`modal`);
 
-  const instance = basicLightbox.create(`
+  const onEscapeClose = (event) => {
+    if (event.key === "Escape") {
+      instance.close();
+    }
+  };
+
+  const instance = basicLightbox.create(
+    `
    <img   class="gallery__image"
    src="${event.target.dataset.source}"
-      >
-`);
+      >`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", onEscapeClose);
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", onEscapeClose);
+      },
+    }
+  );
 
   instance.show();
 }
+
+// document.addEventListener("keydown", function (e) {
+//   if (e.keyCode === 27) document.getElementById("modal_id").hidden = 1;
+// });
+
+// $(".modal").modal({ backdrop: "static", keyboard: false });
+
+// function closeEsc(event) {
+//   if (event.code !== "Escape") {
+//     return;
+//   }
+//   instance.close();
+// }
