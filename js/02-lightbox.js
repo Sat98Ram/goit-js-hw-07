@@ -15,11 +15,7 @@ const galleryItem = galleryItems.map((item) => {
 
 gallery.insertAdjacentHTML("beforeend", galleryItem.join(""));
 
-gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  const lightbox = new SimpleLightbox(".gallery__link", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
+const lightbox = new SimpleLightbox(".gallery__link", {
+  captionsData: "alt",
+  captionDelay: 250,
 });
